@@ -3,8 +3,6 @@ package com.example.cars;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,9 +36,7 @@ public class carAdapter extends RecyclerView.Adapter<TestViewHolder> {
         holder.txttype.setText(type.get(position));
         holder.txtlat.setText("lat:" + lat.get(position).toString());
         holder.txtlong.setText("long:" + lng.get(position).toString());
-        Picasso.get().load(url.get(position)).fit().into(holder.imgPicasso);
-
-
+        Picasso.get().load(url.get(position)).fit().into(holder.imgcar);
     }
 
     @Override

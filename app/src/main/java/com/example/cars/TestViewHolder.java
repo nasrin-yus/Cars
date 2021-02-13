@@ -11,13 +11,13 @@ public class TestViewHolder extends RecyclerView.ViewHolder {
     TextView txttype;
     TextView txtlat;
     TextView txtlong;
-    ImageView  imgPicasso;
+    ImageView  imgcar;
     public TestViewHolder(@NonNull View itemView) {
         super(itemView);
         txttype = itemView.findViewById(R.id.txttype);
         txtlat = itemView.findViewById(R.id.txtlat);
         txtlong = itemView.findViewById(R.id.txtlong);
-        imgPicasso=itemView.findViewById(R.id.imgcar);
+        imgcar=itemView.findViewById(R.id.imgcar);
 
 
     }

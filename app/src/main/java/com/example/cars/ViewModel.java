@@ -1,5 +1,5 @@
 
-package CarModels;
+package com.example.cars;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

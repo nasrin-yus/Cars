@@ -11,11 +11,10 @@ import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import CarModels.ViewModel;
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,10 +27,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AsyncHttpClient client=new AsyncHttpClient();
-        String urll="https://pouyaheydari.com/vehicles.json";
-        client.get(urll,new  JsonHttpResponseHandler(){
+        client.get("https://pouyaheydari.com/vehicles.json",new  JsonHttpResponseHandler(){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 Gson gson=new Gson();
                 type = new ArrayList<>();
@@ -39,14 +37,14 @@ public class MainActivity extends AppCompatActivity {
                 lat = new ArrayList<>();
                 lng = new ArrayList<>();
 
-                ViewModel model=gson.fromJson(response.toString(), ViewModel.class);
+                ViewModel model = gson.fromJson(response.toString(), ViewModel.class);
                 for(int i=0; i < model.getVehicles().size();i++) {
                     type.add("Type : "+model.getVehicles().get(i).getType().toString());
                     lat.add(model.getVehicles().get(i).getLat());
                     lng.add(model.getVehicles().get(i).getLng());
                     url.add(model.getVehicles().get(i).getImageUrl());
                 }
-                recycler=findViewById(R.id.recycler);
+                recycler=findViewById(R.id.Myrecycler);
                 LinearLayoutManager manager = new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL,false);
                 recycler.setLayoutManager(manager);
                 carAdapter adapter = new carAdapter(type,lat,lng,url);
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Toast.makeText(MainActivity.this, "error" , Toast.LENGTH_SHORT).show();
 
